@@ -9,4 +9,4 @@ spring:
       server:
         git:
           uri: https://github.com/bettor-league/configuration-repository
-          default-label: ${spring.profiles.active}
+          default-label: develop
