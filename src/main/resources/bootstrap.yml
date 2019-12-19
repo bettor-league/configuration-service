@@ -2,8 +2,6 @@ server:
   port: 1000
 
 spring:
-  profiles:
-    active: develop
   cloud:
     config:
       server:
