@@ -1,0 +1,89 @@
+# Start services on random port by default
+server.port: 0
+
+# Admin account
+bettorleague:
+  admin:
+    id: 000000000000000000000001
+    username: admin
+    email: admin@admin.com
+    password: admin
+
+# Spring
+spring:
+  profiles:
+    active: development
+  main:
+    allow-bean-definition-overriding: true
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+# Actuator
+management:
+  endpoint:
+    metrics:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+# Eureka
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:2000/eureka/
+
+# Security
+security:
+  enabled: false
+  oauth2:
+    resource:
+      user-info-uri: http://localhost:5000/oauth/me
+      token-info-uri: http://localhost:5000/oauth/check_token
+    client:
+      client-id: bettor-league-server
+      client-secret: BETTOR_LEAGUE_SERVER_PASSWORD
+      access-token-uri: http://localhost:5000/oauth/token
+      grant-type: client_credentials
+      scope: server
+    unprotected-path:
+      - /
+      - /error
+      - /favicon.ico
+      - /swagger-ui.html
+      - /**/*.png
+      - /**/*.gif
+      - /**/*.svg
+      - /**/*.jpg
+      - /**/*.html
+      - /**/*.css
+      - /**/*.js
+      - /**/*.js.map
+      - /actuator/**
+      - /v3/api-docs/**
+      - /swagger-resources/**
+      - /swagger-ui/**
+      - /webjars/**
+      - /oauth/**
+      - /oauth2/**
+      - /login
+      - /logout
+
+
+---
+spring:
+  profiles: docker
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://registry-service:2000/eureka/
+
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://authentication-service:5000/oauth/me
+      token-info-uri: http://authentication-service:5000/oauth/check_token
+    client:
+      accessTokenUri: http://authentication-service:5000/oauth/token
