@@ -10,8 +10,10 @@ bettorleague:
       server:
         client-id: bettor-league-server
         client-secret: BETTOR_LEAGUE_SERVER_PASSWORD
+
 security:
   social: true
+
 spring:
   data:
     mongodb:
@@ -30,17 +32,18 @@ spring:
               - email
               - profile
           facebook:
-            client-id: 360218771245694
-            client-secret: 6583919fb824ed6d737791a24e87dbfb
+            client-id: 1370144506464812
+            client-secret: 25a52de323d1be0e8a966121fd46cc46
             redirect-uri: "{baseUrl}/oauth2/callback/{registrationId}"
             scope:
               - email
               - public_profile
+              - user_friends
         provider:
           facebook:
-            authorizationUri: https://www.facebook.com/v3.0/dialog/oauth
-            tokenUri: https://graph.facebook.com/v3.0/oauth/access_token
-            userInfoUri: https://graph.facebook.com/v3.0/me?fields=id,first_name,middle_name,last_name,name,email,verified,is_verified,picture.width(250).height(250)
+            authorization-uri: https://www.facebook.com/v3.0/dialog/oauth
+            token-uri: https://graph.facebook.com/v3.0/oauth/access_token
+            user-info-uri: https://graph.facebook.com/v3.0/me?fields=id,first_name,middle_name,last_name,name,email,verified,is_verified,picture.width(960).height(960)
 ---
 spring:
   profiles: docker

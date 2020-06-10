@@ -31,8 +31,8 @@ management:
 # Eureka
 eureka:
   client:
-    service-url:
-      default-zone: http://localhost:2000/eureka/
+    serviceUrl:
+      defaultZone: http://localhost:2000/eureka/
 
 # Security
 security:
