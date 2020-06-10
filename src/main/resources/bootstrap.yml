@@ -3,7 +3,15 @@ server:
 
 spring:
   profiles:
-    active: develop
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/local
+---
+spring:
+  profiles: production
   cloud:
     config:
       server:
