@@ -1,13 +1,17 @@
 # Start services on random port by default
 server.port: 0
 
-# Admin account
-bettorleague:
-  admin:
-    id: 000000000000000000000001
-    username: admin
-    email: admin@admin.com
-    password: admin
+# SWAGGER
+springdoc:
+  swagger-ui:
+    use-root-path: true
+    oauth:
+      use-basic-authentication-with-access-code-grant: true
+      client-id: bettor-league-swagger
+      client-secret: ${BETTOR_LEAGUE_SWAGGER_SECRET}
+  oauth-flow:
+    authorization-url: http://localhost:5000/oauth2/authorize
+    token-url: http://localhost:5000/oauth2/token
 
 # Spring
 spring:
@@ -18,6 +22,23 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          issuer-uri: http://localhost:5000
+      client:
+        registration:
+          server-client:
+            provider: spring
+            client-id: bettor-league-server
+            client-secret: ${BETTOR_LEAGUE_SERVER_SECRET}
+            authorization-grant-type: client_credentials
+            scope: server
+            client-name: server-client
+        provider:
+          spring:
+            token-uri: http://localhost:5000
 
 # Actuator
 management:
@@ -36,44 +57,37 @@ eureka:
 
 # Security
 security:
-  enabled: false
-  oauth2:
-    resource:
-      user-info-uri: http://localhost:5000/oauth/me
-      token-info-uri: http://localhost:5000/oauth/check_token
-    client:
-      client-id: bettor-league-server
-      client-secret: BETTOR_LEAGUE_SERVER_PASSWORD
-      access-token-uri: http://localhost:5000/oauth/token
-      grant-type: client_credentials
-      scope: server
-    unprotected-path:
-      - /
-      - /error
-      - /favicon.ico
-      - /swagger-ui.html
-      - /**/*.png
-      - /**/*.gif
-      - /**/*.svg
-      - /**/*.jpg
-      - /**/*.html
-      - /**/*.css
-      - /**/*.js
-      - /**/*.js.map
-      - /actuator/**
-      - /v3/api-docs/**
-      - /swagger-resources/**
-      - /swagger-ui/**
-      - /webjars/**
-      - /oauth/**
-      - /oauth2/**
-      - /login
-      - /logout
+  enabled: true
+  unprotected-path:
+    - /
+    - /error
+    - /favicon.ico
+    - /swagger-ui.html
+    - /**/*.png
+    - /**/*.gif
+    - /**/*.svg
+    - /**/*.jpg
+    - /**/*.html
+    - /**/*.css
+    - /**/*.js
+    - /**/*.js.map
+    - /actuator/**
+    - /v3/api-docs/**
+    - /swagger-resources/**
+    - /swagger-ui/**
+    - /webjars/**
+    - /oauth/**
+    - /oauth2/**
+    - /authentication
+    - /login
+    - /logout
 
 
 ---
 spring:
-  profiles: docker
+  config:
+    activate:
+      on-profile: docker
 
 eureka:
   client:

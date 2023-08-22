@@ -11,7 +11,9 @@ spring:
           search-locations: classpath:/local
 ---
 spring:
-  profiles: production
+  config:
+    activate:
+      on-profile: production
   cloud:
     config:
       server:

@@ -1,12 +1,23 @@
+logging:
+  level:
+    org.springframework.security: DEBUG
+
+security:
+  enabled: true
+
 spring:
   data:
     mongodb:
       host: localhost
       port: 27017
       database: bettor-league
+
+
 ---
 spring:
-  profiles: docker
+  config:
+    activate:
+      on-profile: docker
   data:
     mongodb:
       host: mongo-database

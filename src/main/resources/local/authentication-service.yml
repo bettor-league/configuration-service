@@ -1,20 +1,58 @@
 server:
   port: 5000
 
-bettorleague:
-  oauth2:
-    client:
-      ui:
-        client-id: bettor-league-ui
-        client-secret: BETTOR_LEAGUE_CLIENT_PASSWORD
-      server:
-        client-id: bettor-league-server
-        client-secret: BETTOR_LEAGUE_SERVER_PASSWORD
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: DEBUG
+    org.springframework.security.oauth2: DEBUG
+
+bettor-league:
+  user:
+    admin:
+      email: admin@admin.fr
+      password: admin
+  client:
+    ui:
+      client-id: bettor-league-ui
+      client-secret: ${BETTOR_LEAGUE_CLIENT_SECRET}
+      scope:
+        - read
+    swagger:
+      client-id: bettor-league-swagger
+      client-secret: ${BETTOR_LEAGUE_SWAGGER_SECRET}
+      scope:
+        - read
+    server:
+      client-id: bettor-league-server
+      client-secret: ${BETTOR_LEAGUE_SERVER_SECRET}
+      scope:
+        - read
+        - write
 
 security:
   social: true
 
 spring:
+  kafka:
+    listener:
+      ack-mode: manual_immediate
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: authentication-service
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: '*'
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
   data:
     mongodb:
       host: localhost
@@ -24,29 +62,32 @@ spring:
     oauth2:
       client:
         registration:
+          github:
+            provider: github
+            client-id: 1e04dd018b6ce99a0e02
+            client-secret: ${BETTOR_LEAGUE_GITHUB_SECRET}
+            scope: user:email
+            client-name: Sign in with GitHub
           google:
+            provider: google
             client-id: 983464398033-vgjunh6qcpbs9riprq99u46gjq7kbmcq.apps.googleusercontent.com
-            client-secret: uVghPcBz66tey9T_2VRF6v0p
-            redirect-uri: "{baseUrl}/oauth2/callback/{registrationId}"
-            scope:
-              - email
-              - profile
-          facebook:
-            client-id: 1370144506464812
-            client-secret: 25a52de323d1be0e8a966121fd46cc46
-            redirect-uri: "{baseUrl}/oauth2/callback/{registrationId}"
-            scope:
-              - email
-              - public_profile
-              - user_friends
+            client-secret: ${BETTOR_LEAGUE_GOOGLE_SECRET}
+            scope: https://www.googleapis.com/auth/userinfo.email
+            client-name: Sign in with Google
         provider:
-          facebook:
-            authorization-uri: https://www.facebook.com/v3.0/dialog/oauth
-            token-uri: https://graph.facebook.com/v3.0/oauth/access_token
-            user-info-uri: https://graph.facebook.com/v3.0/me?fields=id,first_name,middle_name,last_name,name,email,verified,is_verified,picture.width(960).height(960)
+          google:
+            user-name-attribute: email
+          github:
+            user-name-attribute: email
+
 ---
 spring:
-  profiles: docker
+  config:
+    activate:
+      on-profile: docker
+  kafka:
+    producer:
+      bootstrap-servers: kafka:9092
   data:
     mongodb:
       host: mongo-database
