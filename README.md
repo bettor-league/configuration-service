@@ -6,10 +6,13 @@
 
 #### Env variable
 
-| Variable                     | Value                        |
-|------------------------------|------------------------------|
-| BETTOR_LEAGUE_CLIENT_SECRET  | BETTOR_LEAGUE_CLIENT_SECRET  |
-| BETTOR_LEAGUE_SWAGGER_SECRET | BETTOR_LEAGUE_SWAGGER_SECRET |
-| BETTOR_LEAGUE_SERVER_SECRET  | BETTOR_LEAGUE_SERVER_SECRET  |
-| BETTOR_LEAGUE_GITHUB_SECRET  |                              |
-| BETTOR_LEAGUE_GOOGLE_SECRET  |                              |
+| Variable                           | Value                        |
+|------------------------------------|------------------------------|
+| BETTOR_LEAGUE_CLIENT_SECRET        | BETTOR_LEAGUE_CLIENT_SECRET  |
+| BETTOR_LEAGUE_SWAGGER_SECRET       | BETTOR_LEAGUE_SWAGGER_SECRET |
+| BETTOR_LEAGUE_SERVER_SECRET        | BETTOR_LEAGUE_SERVER_SECRET  |
+| BETTOR_LEAGUE_GITHUB_SECRET        |                              |
+| BETTOR_LEAGUE_GOOGLE_SECRET        |                              |
+| BETTOR_LEAGUE_FOOTBALL_DATA_TOKENS |                              |
+| BETTOR_LEAGUE_ADMIN_EMAIL          |                              |
+| BETTOR_LEAGUE_ADMIN_PASSWORD       |                              |

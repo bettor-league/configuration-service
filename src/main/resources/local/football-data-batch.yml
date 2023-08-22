@@ -1,7 +1,3 @@
-football-data:
-  base-url: http://api.football-data.org
-  competitions: 2002,2014,2015,2019,2021,2003,2013
-  tokens: 27daafb5ac6742b4a7ab34b2ae44e12a,e6af0ec31e5449ec8e8da2a4c5186188,1d2d673e7f5044d69f76d04ffdb11eba,6dc34a4ea1b14522ae31451d7df9fc5e
 eureka:
   client:
     enabled: false

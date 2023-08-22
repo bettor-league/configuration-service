@@ -11,8 +11,8 @@ logging:
 bettor-league:
   user:
     admin:
-      email: admin@admin.fr
-      password: admin
+      email: ${BETTOR_LEAGUE_ADMIN_EMAIL}
+      password: ${BETTOR_LEAGUE_ADMIN_PASSWORD}
   client:
     ui:
       client-id: bettor-league-ui

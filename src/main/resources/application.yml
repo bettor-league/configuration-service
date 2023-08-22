@@ -18,5 +18,7 @@ spring:
     config:
       server:
         git:
+          username: cnadjim
+          password: ${GITHUB_TOKEN}
           uri: https://github.com/bettor-league/configuration-repository
           default-label: develop
