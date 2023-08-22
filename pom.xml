@@ -16,15 +16,6 @@
 		<relativePath/>
 	</parent>
 
-	<distributionManagement>
-		<repository>
-			<id>github</id>
-			<name>GitHub OWNER Apache Maven Packages</name>
-			<url>https://maven.pkg.github.com/bettor-league/configuration-service</url>
-		</repository>
-	</distributionManagement>
-
-
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
