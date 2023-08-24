@@ -1,12 +1,12 @@
 server:
   port: 5000
 
-logging:
-  level:
-    root: INFO
-    org.springframework.web: INFO
-    org.springframework.security: DEBUG
-    org.springframework.security.oauth2: DEBUG
+#logging:
+#  level:
+#    root: INFO
+#    org.springframework.web: INFO
+#    org.springframework.security: DEBUG
+#    org.springframework.security.oauth2: DEBUG
 
 bettor-league:
   user:
@@ -15,18 +15,18 @@ bettor-league:
       password: ${BETTOR_LEAGUE_ADMIN_PASSWORD}
   client:
     ui:
-      client-id: bettor-league-ui
-      client-secret: ${BETTOR_LEAGUE_CLIENT_SECRET}
+      id: ${BETTOR_LEAGUE_CLIENT_UI_ID}
+      secret: ${BETTOR_LEAGUE_CLIENT_UI_SECRET}
       scope:
         - read
     swagger:
-      client-id: bettor-league-swagger
-      client-secret: ${BETTOR_LEAGUE_SWAGGER_SECRET}
+      id: ${BETTOR_LEAGUE_CLIENT_SWAGGER_ID}
+      secret: ${BETTOR_LEAGUE_CLIENT_SWAGGER_SECRET}
       scope:
         - read
     server:
-      client-id: bettor-league-server
-      client-secret: ${BETTOR_LEAGUE_SERVER_SECRET}
+      id: ${BETTOR_LEAGUE_CLIENT_SERVER_ID}
+      secret: ${BETTOR_LEAGUE_CLIENT_SERVER_SECRET}
       scope:
         - read
         - write
@@ -64,14 +64,14 @@ spring:
         registration:
           github:
             provider: github
-            client-id: 1e04dd018b6ce99a0e02
-            client-secret: ${BETTOR_LEAGUE_GITHUB_SECRET}
+            client-id: ${BETTOR_LEAGUE_CLIENT_GITHUB_ID}
+            client-secret: ${BETTOR_LEAGUE_CLIENT_GITHUB_SECRET}
             scope: user:email
             client-name: Sign in with GitHub
           google:
             provider: google
-            client-id: 983464398033-vgjunh6qcpbs9riprq99u46gjq7kbmcq.apps.googleusercontent.com
-            client-secret: ${BETTOR_LEAGUE_GOOGLE_SECRET}
+            client-id: ${BETTOR_LEAGUE_CLIENT_GOOGLE_ID}
+            client-secret: ${BETTOR_LEAGUE_CLIENT_GOOGLE_SECRET}
             scope: https://www.googleapis.com/auth/userinfo.email
             client-name: Sign in with Google
         provider:

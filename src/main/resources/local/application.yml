@@ -7,8 +7,8 @@ springdoc:
     use-root-path: true
     oauth:
       use-basic-authentication-with-access-code-grant: true
-      client-id: bettor-league-swagger
-      client-secret: ${BETTOR_LEAGUE_SWAGGER_SECRET}
+      client-id: ${BETTOR_LEAGUE_CLIENT_SWAGGER_ID}
+      client-secret: ${BETTOR_LEAGUE_CLIENT_SWAGGER_SECRET}
   oauth-flow:
     authorization-url: http://localhost:5000/oauth2/authorize
     token-url: http://localhost:5000/oauth2/token
@@ -31,18 +31,22 @@ spring:
         registration:
           server-client:
             provider: spring
-            client-id: bettor-league-server
-            client-secret: ${BETTOR_LEAGUE_SERVER_SECRET}
+            client-id: ${BETTOR_LEAGUE_CLIENT_SERVER_ID}
+            client-secret: ${BETTOR_LEAGUE_CLIENT_SERVER_SECRET}
             authorization-grant-type: client_credentials
-            scope: server
+            scope:
+              - read
+              - write
             client-name: server-client
         provider:
           spring:
-            token-uri: http://localhost:5000
+            token-uri: http://localhost:5000/oauth2/token
 
 # Actuator
 management:
   endpoint:
+    env:
+      show-values: WHEN_AUTHORIZED
     metrics:
       enabled: true
   endpoints:
@@ -98,11 +102,3 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://registry-service:2000/eureka/
-
-security:
-  oauth2:
-    resource:
-      user-info-uri: http://authentication-service:5000/oauth/me
-      token-info-uri: http://authentication-service:5000/oauth/check_token
-    client:
-      accessTokenUri: http://authentication-service:5000/oauth/token
