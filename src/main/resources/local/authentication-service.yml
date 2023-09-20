@@ -1,63 +1,14 @@
 server:
   port: 5000
 
-#logging:
-#  level:
-#    root: INFO
-#    org.springframework.web: INFO
-#    org.springframework.security: DEBUG
-#    org.springframework.security.oauth2: DEBUG
-
-bettor-league:
-  user:
-    admin:
-      email: ${BETTOR_LEAGUE_ADMIN_EMAIL}
-      password: ${BETTOR_LEAGUE_ADMIN_PASSWORD}
-  client:
-    ui:
-      id: ${BETTOR_LEAGUE_CLIENT_UI_ID}
-      secret: ${BETTOR_LEAGUE_CLIENT_UI_SECRET}
-      scope:
-        - read
-    swagger:
-      id: ${BETTOR_LEAGUE_CLIENT_SWAGGER_ID}
-      secret: ${BETTOR_LEAGUE_CLIENT_SWAGGER_SECRET}
-      scope:
-        - read
-    server:
-      id: ${BETTOR_LEAGUE_CLIENT_SERVER_ID}
-      secret: ${BETTOR_LEAGUE_CLIENT_SERVER_SECRET}
-      scope:
-        - read
-        - write
+mongo:
+  application:
+    database: authentication-database
 
 security:
   social: true
 
 spring:
-  kafka:
-    listener:
-      ack-mode: manual_immediate
-    consumer:
-      bootstrap-servers: localhost:9092
-      group-id: authentication-service
-      auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-      properties:
-        spring:
-          json:
-            trusted:
-              packages: '*'
-    producer:
-      bootstrap-servers: localhost:9092
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-  data:
-    mongodb:
-      host: localhost
-      port: 27017
-      database: bettor-league
   security:
     oauth2:
       client:

@@ -1,0 +1,12 @@
+mongo:
+  event:
+    authenticationDatabase: admin
+    username: ${BETTOR_LEAGUE_MONGO_DATABASE_USERNAME}
+    password: ${BETTOR_LEAGUE_MONGO_DATABASE_PASSWORD}
+    host: localhost
+    port: 27017
+    database: event-store
+
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092

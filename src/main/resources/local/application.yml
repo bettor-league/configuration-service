@@ -1,6 +1,29 @@
-# Start services on random port by default
 server.port: 0
 
+
+bettor-league:
+  user:
+    admin:
+      id: 4b4f822e-eb69-432e-be30-c2f4b156523d
+      email: ${BETTOR_LEAGUE_ADMIN_EMAIL}
+      password: ${BETTOR_LEAGUE_ADMIN_PASSWORD}
+  client:
+    ui:
+      id: ${BETTOR_LEAGUE_CLIENT_UI_ID}
+      secret: ${BETTOR_LEAGUE_CLIENT_UI_SECRET}
+      scope:
+        - read
+    swagger:
+      id: ${BETTOR_LEAGUE_CLIENT_SWAGGER_ID}
+      secret: ${BETTOR_LEAGUE_CLIENT_SWAGGER_SECRET}
+      scope:
+        - read
+    server:
+      id: ${BETTOR_LEAGUE_CLIENT_SERVER_ID}
+      secret: ${BETTOR_LEAGUE_CLIENT_SERVER_SECRET}
+      scope:
+        - read
+        - write
 # SWAGGER
 springdoc:
   swagger-ui:
@@ -15,13 +38,8 @@ springdoc:
 
 # Spring
 spring:
-  profiles:
-    active: development
   main:
     allow-bean-definition-overriding: true
-  jpa:
-    hibernate:
-      ddl-auto: none
   security:
     oauth2:
       resource-server:
@@ -53,8 +71,11 @@ management:
     web:
       exposure:
         include: "*"
+
 # Eureka
 eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
   client:
     serviceUrl:
       defaultZone: http://localhost:2000/eureka/
@@ -66,20 +87,23 @@ security:
     - /
     - /error
     - /favicon.ico
-    - /swagger-ui.html
-    - /**/*.png
-    - /**/*.gif
-    - /**/*.svg
-    - /**/*.jpg
-    - /**/*.html
-    - /**/*.css
-    - /**/*.js
-    - /**/*.js.map
+    - /*/*.png
+    - /*/*.gif
+    - /*/*.svg
+    - /*/*.jpg
+    - /*/*.html
+    - /*/*.css
+    - /*/*.js
+    - /*/*.js.map
     - /actuator/**
+    - /v3/api-docs
     - /v3/api-docs/**
+    - /swagger-ui.html
     - /swagger-resources/**
     - /swagger-ui/**
     - /webjars/**
+    - /assets/**
+    - /csrf
     - /oauth/**
     - /oauth2/**
     - /authentication

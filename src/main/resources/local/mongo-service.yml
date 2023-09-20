@@ -1,0 +1,16 @@
+mongo:
+  application:
+    authenticationDatabase: admin
+    username: ${BETTOR_LEAGUE_MONGO_DATABASE_USERNAME}
+    password: ${BETTOR_LEAGUE_MONGO_DATABASE_PASSWORD}
+    host: localhost
+    port: 27017
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+  data:
+    mongodb:
+      host: mongo-database
